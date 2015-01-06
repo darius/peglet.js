@@ -77,9 +77,8 @@ function parse(rules, actions, rule, text) {
         }
         else if (rules[token] !== undefined) {
             res = parseRule(token, pos);
-            if (res.ok)
-                res.vals = vals.concat(res.vals);
-            return res;
+            return {ok: res.ok, far: res.far, pos: res.pos,
+                    vals: (res.ok ? vals.concat(res.vals) : undefined)};
         }
         else if (actions[token] !== undefined) {
             var f = actions[token];
